@@ -1,0 +1,45 @@
+{% extends "shop/base.html" %}
+
+{% block title %}E-commerce - Accueil{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Bienvenue sur Mon zeub !</h1>
+    <hr class="my-4">
+
+    <p class="lead">Trouvez les meilleurs produits en ligne.</p>
+    <p>Parcourez notre large sélection de produits de qualité.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Découvrir</a>
+</div>
+<div class="row">
+    <div class ="col-md-12">
+        <form class="card card-sm"method="GET" action="{% url 'Home' %}">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col">
+                    <input class="form-control form-control-borderless"type="search" name="item-name" placeholder="Rechercher...">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-success" type="submit">Rechercher</button>
+                </div>
+            </div>
+        </form>
+</div>
+</div>
+
+<div class="row">
+    {% for product in product_object %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <img src="{{ product.image }}"  class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <p style="color: blue" class="card-text">{{ product.price }} $</p>
+                <a href="{{ product.id }}" class="btn btn-warning">Regarder</a>
+                <a href="{% url 'add_to_cart' product.id %}">Ajouter au panier</a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
